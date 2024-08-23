@@ -1,6 +1,6 @@
+import Header from "./Header";
 import { useContext } from "react";
 import { ThemeContext } from "./ThemeContextProvider";
-import Header from "./Header";
 
 export default function Page() {
   const { lightMode } = useContext(ThemeContext);

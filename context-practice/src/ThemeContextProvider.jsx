@@ -11,7 +11,6 @@ export default function ThemeContextProvider({ children }) {
   function toggleLightMode() {
     setLightMode((prevMode) => !prevMode);
   }
-
   return (
     <ThemeContext.Provider value={{ lightMode, toggleLightMode }}>
       {children}

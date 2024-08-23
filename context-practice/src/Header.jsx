@@ -3,6 +3,7 @@ import { ThemeContext } from "./ThemeContextProvider";
 
 export default function Header() {
   const { lightMode, toggleLightMode } = useContext(ThemeContext);
+
   console.log(lightMode);
   return (
     <header>

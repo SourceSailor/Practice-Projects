@@ -1,5 +1,5 @@
-import Page from "./Page";
 import ThemeContextProvider from "./ThemeContextProvider";
+import Page from "./Page";
 
 function App() {
   return (
