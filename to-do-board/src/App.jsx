@@ -1,14 +1,18 @@
 import { useState, useRef } from "react";
-
 import "./App.css";
+import Task from "./components/Task";
 
 function App() {
   const [tasks, setTasks] = useState([]);
 
-  const taskRef = useRef("");
+  const addTaskRef = useRef("");
+  const editTaskRef = useRef(null); // Separate ref for editing
 
   function onAddTask() {
-    let taskText = taskRef.current.value;
+    let taskText = addTaskRef.current.value;
+
+    if (taskText.trim() === "") return;
+
     setTasks((prevTasks) => [
       ...prevTasks,
       {
@@ -17,7 +21,8 @@ function App() {
         complete: false,
       },
     ]);
-    return (taskRef.current.value = "");
+
+    addTaskRef.current.value = "";
   }
 
   function onDeleteTask(id) {
@@ -33,7 +38,13 @@ function App() {
     );
   }
 
-  console.log(tasks);
+  function onEditTask(id, updatedText) {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id ? { ...task, text: updatedText } : task
+      )
+    );
+  }
 
   const btnCss =
     "flex w-24 px-2 py-2 rounded-lg align-middle justify-center bg-slate-300 hover:bg-slate-600 hover:text-white";
@@ -47,46 +58,24 @@ function App() {
           className="border-2 w-52 pl-2"
           placeholder="Task Description"
           type="text"
-          name="addTaskInp"
-          id="addTaskInp"
-          ref={taskRef}
+          ref={addTaskRef} // Ref for adding new task
         />
         <button onClick={onAddTask} className={btnCss}>
           Enter
         </button>
       </div>
 
-      {/* Tasks */}
       <section className="flex flex-row justify-center align-middle">
         {tasks.map((task) => (
-          <div
+          <Task
             key={task.id}
-            className="flex flex-col justify-between border-gray-400 border-2 w-[400px] h-[200px] py-5 align-middle rounded-lg"
-          >
-            <h4
-              className={`flex-grow flex items-center justify-center ${
-                task.complete && "line-through"
-              }`}
-            >
-              {task.text}
-            </h4>
-
-            {/* Buttons */}
-            <div className="flex flex-row gap-3 align-middle justify-center">
-              {/* DELETE */}
-              <button onClick={() => onDeleteTask(task.id)} className={btnCss}>
-                Delete
-              </button>
-
-              {/* EDIT */}
-              <button className={btnCss}>Edit</button>
-
-              {/* COMPLETE */}
-              <button onClick={() => onComplete(task.id)} className={btnCss}>
-                {!task.complete ? "Complete" : "Incomplete"}
-              </button>
-            </div>
-          </div>
+            task={task}
+            btnCss={btnCss}
+            onDeleteTask={onDeleteTask}
+            onComplete={onComplete}
+            editTask={onEditTask}
+            ref={editTaskRef} // Forward ref for editing task
+          />
         ))}
       </section>
     </main>
