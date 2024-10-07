@@ -65,7 +65,7 @@ function App() {
         </button>
       </div>
 
-      <section className="flex flex-row justify-center align-middle">
+      <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 grid-flow-row md:flex-row justify-center align-middle">
         {tasks.map((task) => (
           <Task
             key={task.id}

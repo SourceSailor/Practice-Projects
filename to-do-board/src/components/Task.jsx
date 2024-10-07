@@ -12,7 +12,7 @@ const Task = forwardRef(
     }
 
     return (
-      <div className="flex flex-col justify-between border-gray-400 border-2 w-[400px] h-[200px] py-5 align-middle rounded-lg mx-5">
+      <div className="flex flex-col justify-between border-gray-400 border-2 w-[350px] sm:w-[250px] md:w-[350px] h-[200px] py-5 align-middle rounded-lg mx-2 md:mx-5 mb-5 ">
         {isEditing ? (
           <div className="flex flex-row gap-2 items-center justify-center grow">
             <input
