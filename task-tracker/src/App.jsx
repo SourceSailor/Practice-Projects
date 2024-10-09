@@ -1,8 +1,12 @@
-import "./App.css";
+import { useState } from "react";
+
 import Completed from "./components/Completed";
 import ToDo from "./components/ToDo";
 
+import "./App.css";
 function App() {
+  const [task, setTask] = useState([]);
+
   return (
     <>
       <header>
