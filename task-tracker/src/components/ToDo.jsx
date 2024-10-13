@@ -2,8 +2,7 @@ import { useState, useRef } from "react";
 import Modal from "./Modal";
 import Task from "./Task";
 
-const ToDo = () => {
-  const [tasks, setTasks] = useState([]);
+const ToDo = ({ tasks, setTasks, onDragStart, onDragOver, onDrop }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
 
@@ -73,7 +72,11 @@ const ToDo = () => {
   console.log("Edit Task State: ", editingTask);
 
   return (
-    <section className="flex flex-col w-[50%] gap-5 items-center">
+    <section
+      className="flex flex-col w-[50%] gap-5 items-center"
+      onDragOver={onDragOver}
+      onDrop={onDrop}
+    >
       <h2 className="text-2xl font-semibold">To Dos</h2>
 
       {/* Add Task Button - Opens Modal */}
@@ -83,15 +86,16 @@ const ToDo = () => {
       >
         Add Task
       </button>
+
       <div>
         {/* Mapping of Task state */}
-
         {tasks.map((task) => (
           <Task
             key={task.id}
             {...task}
             deleteTask={onDeleteTask}
             editBtn={() => onEditBtn(task)}
+            onDragStart={onDragStart}
           />
         ))}
       </div>

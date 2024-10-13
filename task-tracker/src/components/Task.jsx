@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 
-const Task = ({ title, description, deleteTask, id, editBtn }) => {
+const Task = ({ title, description, deleteTask, id, editBtn, onDragStart }) => {
   const [timerRunning, setTimerRunning] = useState(null);
   const [time, setTime] = useState(0);
 
@@ -36,7 +36,11 @@ const Task = ({ title, description, deleteTask, id, editBtn }) => {
   console.log(time);
 
   return (
-    <section className="flex flex-col p-10 items-center justify-center bg-slate-400 gap-4 rounded-lg mt-5">
+    <section
+      className="flex flex-col p-10 items-center justify-center bg-slate-400 gap-4 rounded-lg mt-5"
+      draggable
+      onDragStart={(e) => onDragStart(e, { id, title, description })}
+    >
       <div className="flex flex-row justify-between w-full">
         {/* Task Title */}
         <h4 className="text-2xl font-semibold">{title}</h4>
