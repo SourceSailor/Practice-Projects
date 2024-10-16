@@ -35,7 +35,7 @@ const App = () => {
   };
 
   return (
-    <div className="flex justify-around">
+    <div className="flex flex-row justify-around">
       <ToDo
         tasks={tasks}
         setTasks={setTasks}

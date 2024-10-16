@@ -15,7 +15,7 @@ const ToDo = ({ tasks, setTasks, onDragStart, onDragOver, onDrop }) => {
     const descriptionValue = descriptionRef.current.value;
     const taskId = Math.floor(Math.random() * 100000);
 
-    if (titleValue.length || descriptionValue.length > 0) {
+    if (titleValue.length && descriptionValue.length > 0) {
       setTasks((prevTasks) => [
         ...prevTasks,
         {
@@ -25,6 +25,8 @@ const ToDo = ({ tasks, setTasks, onDragStart, onDragOver, onDrop }) => {
         },
       ]);
       setIsModalOpen(false);
+    } else if (titleValue.length && descriptionValue.length === 0) {
+      alert("Please enter both a title and a description for the task.");
     }
   }
 
