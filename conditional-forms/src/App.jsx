@@ -27,7 +27,17 @@ function App() {
     }));
   }
 
-  function handlePrompt(e, index) {}
+  function handlePrompt(e, i) {
+    const { name, value } = e.target;
+    setPrompts((prevPrompts) => {
+      const updatedPrompts = [...prevPrompts];
+      updatedPrompts[i] = {
+        ...updatedPrompts[i],
+        [name]: value,
+      };
+      return updatedPrompts;
+    });
+  }
 
   // Get today's date
   const today = new Date();
@@ -151,9 +161,9 @@ function App() {
                 <select
                   className={inputClass}
                   value={prompt.question}
-                  onChange={handlePrompt}
-                  name="prompt"
-                  id="prompt"
+                  onChange={(e) => handlePrompt(e, i)}
+                  name="question"
+                  id="question"
                 >
                   <option>Add Prompt</option>
                   <option value="What is your favorite food?">
@@ -173,10 +183,10 @@ function App() {
                 {/* Prompt Answers */}
                 <textarea
                   className={inputClass}
-                  name="prompt-answer"
-                  id="prompt-answer"
+                  name="answer"
+                  id="answer"
                   value={prompt.answer}
-                  onChange={handlePrompt}
+                  onChange={(e) => handlePrompt(e, i)}
                 />
                 <button className="p-2 w-28 rounded-lg bg-stone-200 hover:bg-stone-300">
                   Add Prompt
